@@ -1,0 +1,17 @@
+node_modules
+.next
+.git
+.github
+.vscode
+.env*
+!.env.local.example
+!.env.example
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+coverage
+mcp-server
+docs
+CHANGELOG.md
+README.md
+CONTRIBUTING.md

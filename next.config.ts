@@ -64,6 +64,10 @@ const SECURITY_HEADERS = [
 ] as const;
 
 const nextConfig: NextConfig = {
+  // Emits a self-contained `.next/standalone` build (server + only the
+  // node_modules actually used) so the production Docker image doesn't
+  // need `npm install` or the full node_modules tree at runtime.
+  output: "standalone",
   /**
    * Cache-Control policy.
    *
