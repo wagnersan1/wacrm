@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "wacrm",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-01-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "vars": {
+    "NEXT_PUBLIC_SUPABASE_URL": "https://odvxelhhwcnqefsszumy.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kdnhlbGhod2NucWVmc3N6dW15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM1NTg2MzEsImV4cCI6MjA5OTEzNDYzMX0.Mf5CrSsNaYV2TDrJELimwKuWTt6KwyC7XL8uc20XuSk",
+    "NEXT_PUBLIC_SITE_URL": "https://wacrm.travelsantur.com",
+    "NEXT_PUBLIC_APP_LOCALE": "en"
+  },
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "routes": [
+    {
+      "pattern": "wacrm.travelsantur.com",
+      "custom_domain": true
+    }
+  ]
+}

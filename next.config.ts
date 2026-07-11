@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
+// Wires up Cloudflare bindings (env vars, etc.) when running `next dev`
+// so local dev matches the Workers runtime. No-op outside that flow.
+initOpenNextCloudflareForDev();
 
 /**
  * Baseline security headers applied to every response.
