@@ -152,6 +152,17 @@ export async function registerPhoneNumber(
   if (/already.*registered/i.test(message)) {
     return { success: true, alreadyRegistered: true }
   }
+  // Numbers onboarded through Meta's own WhatsApp Manager (SMB /
+  // Embedded Signup flow, as opposed to a Tech Provider's own WABA)
+  // are activated by that flow itself — the /register call this
+  // function makes doesn't apply to them and Meta rejects it with
+  // this exact message. That's not a failure: the number is already
+  // live and receiving webhooks, same outcome as "already registered"
+  // above. Without this, every save for an SMB number would be
+  // mis-reported as disconnected even though sending/receiving works.
+  if (/register endpoint is not available for smb/i.test(message)) {
+    return { success: true, alreadyRegistered: true }
+  }
   throw new Error(message)
 }
 

@@ -683,6 +683,16 @@ async function processMessage(
   })
 
   if (msgError) {
+    // Meta's webhook delivery is at-least-once — a redelivered event for a
+    // message we already stored hits the (conversation_id, message_id)
+    // unique index (migration 036). That's an expected replay, not a
+    // failure: the first delivery already ran every side effect below
+    // (conversation update, automations, flows, AI reply), so re-running
+    // them here would duplicate inbox bubbles and double-fire automations.
+    if (isUniqueViolation(msgError)) {
+      console.log('[webhook] duplicate inbound message delivery, skipping:', message.id)
+      return
+    }
     console.error('Error inserting message:', msgError)
     return
   }
